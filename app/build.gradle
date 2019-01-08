@@ -1,20 +1,120 @@
 apply plugin: 'com.android.application'
 
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy-MM-dd-HH-mm')
+    return formattedDate
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.leidong.ldmart"
+        applicationId "com.example.xiaolanyun.ldmart"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        /*
+        启用multiDex支持 解决方法数 超过 64k 的问题
+         */
+        multiDexEnabled true
+        /**
+         * 支持背景模糊
+         */
+        renderscriptTargetApi 25
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
+            /***
+             * 代码混淆
+             */
             minifyEnabled false
+            /*加载默认混淆配置文件*/
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            /***
+             * 自定义字段【true：测试地址 false：线上地址】
+             */
+            buildConfigField "boolean", "IS_TEST", "false"
+            /***
+             * 自定义字段【true: Jenkins 打包 false: AS 打包】
+             */
+            buildConfigField "boolean", "IS_JENKINS", "${IS_JENKINS}"
+            /***
+             * zipalign优化
+             */
+            zipAlignEnabled true
+            /**
+             * 移除无用的resource文件
+             */
+            shrinkResources false
+
+
+        }
+        debug {
+
+            /***
+             * 自定义字段【true：测试地址 false：线上地址】
+             */
+            buildConfigField "boolean", "IS_TEST", "true"
+            /***
+             * 自定义字段【true: Jenkins 打包 false: AS 打包】
+             */
+            buildConfigField "boolean", "IS_JENKINS", "${IS_JENKINS}"
+
+            minifyEnabled false
+
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    /*修改生成的apk名字*/
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def newName
+            def timeNow = getDate().substring(5) // 去掉年
+
+
+            if ("true" == IS_JENKINS) {
+
+                if (variant.buildType.name == 'debug') {
+                    newName = "tutuenglish-v${APP_VERSION}-debug.apk"
+                } else {
+                    newName = "tutuenglish-v${APP_VERSION}-release.apk"
+                }
+
+            } else {
+
+                newName = "tutuenglish-v${APP_VERSION}-${timeNow}-" + variant.buildType.name + ".apk"
+
+            }
+
+            // jenkins打包时修改输出路径保存所有打包记录
+
+            if ("true" == IS_JENKINS) {
+                // 修改输出路径
+                if ('debug' == variant.buildType.name) {
+                    variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk/debug/")
+                } else {
+                    variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk/release/")
+                }
+            }
+
+            outputFileName = newName
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
