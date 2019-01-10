@@ -80,14 +80,14 @@ android {
             if ("true" == IS_JENKINS) {
 
                 if (variant.buildType.name == 'debug') {
-                    newName = "tutuenglish-v${APP_VERSION}-debug.apk"
+                    newName = "XiaoLanYunMart-v${APP_VERSION}-debug.apk"
                 } else {
-                    newName = "tutuenglish-v${APP_VERSION}-release.apk"
+                    newName = "XiaoLanYunMart-v${APP_VERSION}-release.apk"
                 }
 
             } else {
 
-                newName = "tutuenglish-v${APP_VERSION}-${timeNow}-" + variant.buildType.name + ".apk"
+                newName = "XiaoLanYunMart-v${APP_VERSION}-${timeNow}-" + variant.buildType.name + ".apk"
 
             }
 
