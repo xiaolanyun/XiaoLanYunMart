@@ -82,7 +82,7 @@ android {
                 if (variant.buildType.name == 'debug') {
                     newName = "XiaoLanYunMart-v${APP_VERSION}-debug-${timeNow}.apk"
                 } else {
-                    newName = "XiaoLanYunMart-v${APP_VERSION}-release${timeNow}.apk"
+                    newName = "XiaoLanYunMart-v${APP_VERSION}-release-${timeNow}.apk"
                 }
 
             } else {
