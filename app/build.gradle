@@ -74,15 +74,15 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def newName
-            def timeNow = getDate().substring(5) // 去掉年
-
+            //def timeNow = getDate().substring(5) // 去掉年
+            def timeNow = getDate()
 
             if ("true" == IS_JENKINS) {
 
                 if (variant.buildType.name == 'debug') {
-                    newName = "XiaoLanYunMart-v${APP_VERSION}-debug.apk"
+                    newName = "XiaoLanYunMart-v${APP_VERSION}-debug-${timeNow}.apk"
                 } else {
-                    newName = "XiaoLanYunMart-v${APP_VERSION}-release.apk"
+                    newName = "XiaoLanYunMart-v${APP_VERSION}-release${timeNow}.apk"
                 }
 
             } else {
