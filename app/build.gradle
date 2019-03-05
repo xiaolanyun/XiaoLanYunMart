@@ -11,7 +11,7 @@ android {
         release {
             keyAlias 'key0'
             keyPassword 'xiaolanyun521'
-            storeFile file('E:/桌面课程/毕业设计/安卓应用/key/XiaoLanYunMart.jks')
+            storeFile file('E:/android_workspace/XiaoLanYunMart/app/XiaoLanYunMart.jks')
             storePassword 'xiaolanyun521'
         }
     }
