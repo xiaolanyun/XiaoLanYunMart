@@ -7,6 +7,14 @@ static def getDate() {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'xiaolanyun521'
+            storeFile file('E:/桌面课程/毕业设计/安卓应用/key/XiaoLanYunMart.jks')
+            storePassword 'xiaolanyun521'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.xiaolanyun.ldmart"
@@ -28,12 +36,22 @@ android {
     }
     buildTypes {
         release {
-            /***
-             * 代码混淆
-             */
+
+            debuggable true
+            //代码混淆
+            //minifyEnabled true
             minifyEnabled false
             /*加载默认混淆配置文件*/
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            /***
+             * zipalign优化
+             */
+            zipAlignEnabled true
+            /**
+             * 移除无用的resource文件
+             */
+            //shrinkResources true
+
             /***
              * 自定义字段【true：测试地址 false：线上地址】
              */
@@ -42,18 +60,19 @@ android {
              * 自定义字段【true: Jenkins 打包 false: AS 打包】
              */
             buildConfigField "boolean", "IS_JENKINS", "${IS_JENKINS}"
-            /***
-             * zipalign优化
-             */
-            zipAlignEnabled true
-            /**
-             * 移除无用的resource文件
-             */
-            shrinkResources false
 
-
+            //签名引用
+            signingConfig signingConfigs.release
         }
         debug {
+            debuggable true
+            //minifyEnabled true//混淆
+            minifyEnabled false
+            zipAlignEnabled true //zipAlign优化
+            //shrinkResources true //移除无用的资源文件
+
+            /*加载默认混淆配置文件*/
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             /***
              * 自定义字段【true：测试地址 false：线上地址】
@@ -64,10 +83,8 @@ android {
              */
             buildConfigField "boolean", "IS_JENKINS", "${IS_JENKINS}"
 
-            minifyEnabled false
-
-
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名引用
+            signingConfig signingConfigs.release
         }
     }
     /*修改生成的apk名字*/
@@ -106,12 +123,10 @@ android {
 
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     lintOptions {
         abortOnError false
         checkReleaseBuilds false
@@ -136,31 +151,25 @@ greendao {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     /*ButterKnife*/
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     /*BottomBar*/
     implementation 'com.roughike:bottom-bar:2.3.1'
-
     /*RecyclerView*/
     implementation 'com.android.support:recyclerview-v7:26.1.0'
-
     /*Gson*/
     implementation 'com.google.code.gson:gson:2.8.2'
-
     /*GreenDao*/
     implementation 'org.greenrobot:greendao:3.0.1'
     implementation 'org.greenrobot:greendao-generator:3.0.0'
-
     /*Picasso*/
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
