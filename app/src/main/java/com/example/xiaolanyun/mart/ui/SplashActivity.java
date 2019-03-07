@@ -97,7 +97,7 @@ public class SplashActivity extends Activity {
      * 初始化控件
      */
     private void initWidgets() {
-        FontUtils.setFontFromAssets(mAppName, "fonts/tongkati.ttf");
+        //FontUtils.setFontFromAssets(mAppName, "fonts/tongkati.ttf");
 
         mMySharedPreferences = MySharedPreferences.getMySharedPreferences(SplashActivity.this);
         isFirstLogin = mMySharedPreferences.load(Constants.IS_FIRST_LOGIN, true);

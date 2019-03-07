@@ -111,10 +111,10 @@ public class ProductDetailActivity extends Activity implements View.OnClickListe
         mProductDetailPrice.setText(mProductPrice + "元");
         mProductDetailDesc.setText(mProductDesc);
 
-        //设置字体
-        FontUtils.setFontFromAssets(mProductDetailName, "fonts/tongkati.ttf");
-        FontUtils.setFontFromAssets(mProductDetailPrice, "fonts/tongkati.ttf");
-        FontUtils.setFontFromAssets(mProductDetailDesc, "fonts/tongkati.ttf");
+//        //设置字体
+//        FontUtils.setFontFromAssets(mProductDetailName, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductDetailPrice, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductDetailDesc, "fonts/tongkati.ttf");
     }
 
     /**

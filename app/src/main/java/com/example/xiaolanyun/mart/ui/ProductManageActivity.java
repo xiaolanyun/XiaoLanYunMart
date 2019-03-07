@@ -112,10 +112,10 @@ public class ProductManageActivity extends Activity implements View.OnClickListe
         mProductManageDesc.setText(mProductDesc);
 
         //设置字体
-        FontUtils.setFontFromAssets(mProductManageName, "fonts/tongkati.ttf");
-        FontUtils.setFontFromAssets(mProductManagePrice, "fonts/tongkati.ttf");
-        FontUtils.setFontFromAssets(mProductManageStock, "fonts/tongkati.ttf");
-        FontUtils.setFontFromAssets(mProductManageDesc, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductManageName, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductManagePrice, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductManageStock, "fonts/tongkati.ttf");
+//        FontUtils.setFontFromAssets(mProductManageDesc, "fonts/tongkati.ttf");
 
         mMySharedPreferences = MySharedPreferences.getMySharedPreferences(this);
     }

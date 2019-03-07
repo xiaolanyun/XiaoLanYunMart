@@ -11,7 +11,7 @@ android {
         release {
             keyAlias 'key0'
             keyPassword 'xiaolanyun521'
-            storeFile file('E:/android_workspace/XiaoLanYunMart/app/XiaoLanYunMart.jks')
+            storeFile file('./XiaoLanYunMart.jks')
             storePassword 'xiaolanyun521'
         }
     }
@@ -21,7 +21,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        //versionName "1.0"
+        versionName APP_VERSION
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /*
