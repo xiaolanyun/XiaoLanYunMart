@@ -9,9 +9,20 @@ static def getDate() {
 android {
     signingConfigs {
         release {
+            //由于本机打包使用的是本机上的keystore
+            //而jenkins打包的是服务器上的keystore
+            //两个路径不一样
+            if("false".equals(IS_JENKINS))
+            {
+                storeFile file('./XiaoLanYunMart.jks')
+            }
+            else
+            {
+                storeFile file('./XiaoLanYunMart.jks')
+            }
             keyAlias 'key0'
             keyPassword 'xiaolanyun521'
-            storeFile file('./XiaoLanYunMart.jks')
+            //storeFile file('./XiaoLanYunMart.jks')
             storePassword 'xiaolanyun521'
         }
     }
