@@ -104,10 +104,11 @@ android {
         variant.outputs.all { output ->
             def newName
             //def timeNow = getDate().substring(5) // 去掉年
-            def timeNow = getDate()
+            def timeNow
 
             if ("true" == IS_JENKINS) {
 
+                timeNow = BUILD_TIME
                 if (variant.buildType.name == 'debug') {
                     newName = "XiaoLanYunMart-v${APP_VERSION}-debug-${timeNow}.apk"
                 } else {
@@ -115,7 +116,7 @@ android {
                 }
 
             } else {
-
+                timeNow = getDate();
                 newName = "XiaoLanYunMart-v${APP_VERSION}-${timeNow}-" + variant.buildType.name + ".apk"
 
             }
